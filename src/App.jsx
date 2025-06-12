@@ -1,39 +1,30 @@
-// function App() {
-
-//   return (
-//   <div className="text-red-500 text-3xl font-bold underline">
-//     This is a red text div.
-//   </div>
-  
-//   )
-// }
-
-// export default App
-
-
-
 import React from 'react';
-import Header from './components/Header';
-import Home from './components/Home';
-import About from './components/About';
-import Service from './components/Service';
-import Contact from './components/Contact';
-import Footer from './components/Footer';
-import ScrollToTop from './components/ScrollToTop';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout';
+import HomePage from './pages/HomePage';
+import ElectricalPage from './pages/ElectricalPage';
+import LightingPage from './pages/LightingPage';
+import InstrumentationPage from './pages/InstrumentationPage';
+import CommunicationPage from './pages/CommunicationPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <main>
-        <Home />
-        <About />
-        <Service />
-        <Contact />
-      </main>
-      <Footer />
-      <ScrollToTop />
-    </div>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="electrical" element={<ElectricalPage />} />
+            <Route path="lighting" element={<LightingPage />} />
+            <Route path="instrumentation" element={<InstrumentationPage />} />
+            <Route path="communication" element={<CommunicationPage />} />
+            {/* Catch-all route for 404 */}
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

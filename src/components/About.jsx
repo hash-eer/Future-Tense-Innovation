@@ -7,9 +7,7 @@ const About = () => {
                 <div className="max-w-6xl mx-auto">
                     {/* Section Header */}
                     <div className="text-center mb-16">
-                        {/* <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                            About <span className="text-blue-600">Us</span>
-                        </h2> */}
+                       
                          <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">About
                          <span className="text-blue-600"> Us</span>
                          </h2>
