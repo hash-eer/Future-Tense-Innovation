@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import MapComponent from './Map';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
+    fullName: '',
     email: '',
-    phone: '',
-    service: '',
+    subject: '',
     message: ''
   });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -16,19 +18,62 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: ''
-    });
+    setIsSubmitting(true);
+
+    try {
+      // Add timestamp
+      const submissionData = {
+        ...formData,
+        timestamp: new Date().toLocaleString(),
+        date: new Date().toISOString()
+      };
+
+      // Replace with your Google Apps Script Web App URL
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyOs2kteR_eNhdAbkzrVIv47Pr_zQiUX3-HG3i6Et7AF_mrvB0l8Gf-ppKe_rMZtzJ0/exec';
+      // https://script.google.com/macros/s/AKfycbyOs2kteR_eNhdAbkzrVIv47Pr_zQiUX3-HG3i6Et7AF_mrvB0l8Gf-ppKe_rMZtzJ0/exec      
+      // Use fetch with CORS-friendly options
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'cors', // Enable CORS
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(submissionData),
+        redirect: 'follow' // Follow redirects
+      });
+
+      // Check if the response is ok
+      if (response.ok || response.status === 200) {
+        const result = await response.json();
+        console.log('Success:', result);
+        alert('Thank you for your message! We will get back to you soon.');
+        
+        // Reset form
+        setFormData({
+          fullName: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      
+      // More specific error handling
+      if (error.message.includes('CORS')) {
+        alert('There was a network issue. Please try again or contact us directly.');
+      } else if (error.message.includes('Failed to fetch')) {
+        alert('Network error. Please check your internet connection and try again.');
+      } else {
+        alert('Sorry, there was an error submitting your message. Please try again.');
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -37,20 +82,19 @@ const Contact = () => {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-         
-             <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
-             Contact <span className="text-blue-600">Us</span>
+            <h2 className="text-5xl md:text-6xl font-bold text-gray-800 mb-4">
+              Contact <span className="text-blue-600">Us</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mb-6"></div>
           </div>
-
+          <MapComponent />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-semibold text-gray-800 mb-6">Get in Touch</h3>
                 <p className="text-gray-600 mb-8 leading-relaxed">
-                  Have a project in mind or need expert advice? We're here to help you with all your electrical and engineering needs. Contact us through any of the methods below.
+                  Have a project in mind or need expert advice? We're here to help you with all your electrical and engineering needs.
                 </p>
               </div>
 
@@ -65,7 +109,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-800 mb-1">Address</h4>
-                    <p className="text-gray-600">123 Engineering Street, Tech City, TC 12345</p>
+                    <p className="text-gray-600">Eastern Province, Saudi Arabia</p>
                   </div>
                 </div>
 
@@ -77,7 +121,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-800 mb-1">Phone</h4>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
+                    <p className="text-gray-600">+966 XX XXX XXXX</p>
                   </div>
                 </div>
 
@@ -101,7 +145,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-800 mb-1">Business Hours</h4>
-                    <p className="text-gray-600">Mon - Fri: 8:00 AM - 6:00 PM</p>
+                    <p className="text-gray-600">Sun - Thu: 8:00 AM - 6:00 PM</p>
                     <p className="text-gray-600">Sat: 9:00 AM - 4:00 PM</p>
                   </div>
                 </div>
@@ -113,42 +157,25 @@ const Contact = () => {
               <h3 className="text-2xl font-semibold text-gray-800 mb-6">Send us a Message</h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                      placeholder="Your Name"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                      placeholder="Your Phone"
-                    />
-                  </div>
+                <div>
+                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="fullName"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
+                    placeholder="Your Full Name"
+                  />
                 </div>
                 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address *
+                    Enter Your Email *
                   </label>
                   <input
                     type="email"
@@ -163,22 +190,19 @@ const Contact = () => {
                 </div>
                 
                 <div>
-                  <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Interested In
+                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                    Subject *
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
                     onChange={handleChange}
+                    required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="electrical">Electrical Services</option>
-                    <option value="lighting">Lighting Solutions</option>
-                    <option value="instrumentation">Instrumentation</option>
-                    <option value="communication">Communication Systems</option>
-                  </select>
+                    placeholder="Subject of your message"
+                  />
                 </div>
                 
                 <div>
@@ -191,17 +215,18 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     required
-                    rows="4"
+                    rows="5"
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent transition-colors resize-none"
-                    placeholder="Tell us about your project..."
+                    placeholder="Tell us about your project or inquiry..."
                   ></textarea>
                 </div>
                 
                 <button
                   type="submit"
-                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors shadow-lg"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors shadow-lg"
                 >
-                  Send Message
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
