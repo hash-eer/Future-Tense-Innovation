@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/logoOfCetksa.png'
+import logo from '../assets/logoOfCetksa.jpg'
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);

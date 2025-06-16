@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
-const CommonServiceCard = ({products,pageName,division,discription,bgImg}) => {
+const CommonServiceCard = ({products, pageName, division, discription, bgImg}) => {
   
     return (
         <div className="pt-20">
@@ -62,26 +62,31 @@ const CommonServiceCard = ({products,pageName,division,discription,bgImg}) => {
 
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
                                 {products.map((product) => (
-                                    <div
-                                        key={product.id}
-                                        className="bg-gray-800/95 hover:bg-gray-700/95 transition-all duration-300 p-6 rounded-lg text-center group cursor-pointer backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/20"
+                                   
+                                    <Link
+                                    key={product.id}
+                                    to={`/${pageName}/${product.id}`}
+                                    className="block"
                                     >
-                                        <div className="bg-white rounded-lg p-2 mb-4 mx-auto w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg overflow-hidden">
-                                            <img
-                                                src={product.image}
-                                                alt={product.name}
-                                                className="w-full h-full object-cover rounded-md"
-                                                onError={(e) => {
-                                                    e.target.style.display = "none";
-                                                    e.target.nextSibling.style.display = "flex";
-                                                }}
-                                            />
-                                            <div className="w-full h-full bg-gray-100 rounded-md hidden items-center justify-center">
-                                                <span className="text-gray-400 text-xs">No Image</span>
-                                            </div>
+                                    <div className="bg-gray-800/95 hover:bg-gray-700/95 transition-all duration-300 p-6 rounded-lg text-center group cursor-pointer backdrop-blur-sm border border-gray-700/50 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/20 min-h-[220px] flex flex-col items-center justify-between">
+                                        <div className="bg-white rounded-lg mb-4 w-20 h-20 md:w-24 md:h-24 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg overflow-hidden">
+                                        <img
+                                            src={product.image}
+                                            alt={product.name}
+                                            className="w-full h-full object-contain"
+                                            onError={(e) => {
+                                            e.target.style.display = "none";
+                                            e.target.nextSibling.style.display = "flex";
+                                            }}
+                                        />
+                                        <div className="w-full h-full bg-gray-100 rounded-md hidden items-center justify-center">
+                                            <span className="text-gray-400 text-xs">No Image</span>
+                                        </div>
                                         </div>
                                         <h4 className="text-white font-semibold text-sm leading-tight">{product.name}</h4>
                                     </div>
+                                    </Link>
+
                                 ))}
                             </div>
                         </div>

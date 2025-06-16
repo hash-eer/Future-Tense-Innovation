@@ -7,6 +7,7 @@ import LightingPage from './pages/LightingPage';
 import InstrumentationPage from './pages/InstrumentationPage';
 import CommunicationPage from './pages/CommunicationPage';
 import NotFoundPage from './pages/NotFoundPage';
+import SubServicePage from './pages/subPages/SubServicePage';
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
             <Route path="lighting" element={<LightingPage />} />
             <Route path="instrumentation" element={<InstrumentationPage />} />
             <Route path="communication" element={<CommunicationPage />} />
+
+            <Route path="/:service/:id" element={<SubServicePage />} />
             {/* Catch-all route for 404 */}
             <Route path="*" element={<NotFoundPage />} />
           </Route>

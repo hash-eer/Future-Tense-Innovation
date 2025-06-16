@@ -88,7 +88,7 @@ const Home = () => {
           <div className="flex flex-col md:flex-row gap-4 justify-center items-center mt-28">
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="group relative text-xl border-2 bg-blue-400 border-blue-400 text-white px-10 py-4 rounded-xl font-semibold transition-all duration-500 backdrop-blur-md bg-white/10 hover:bg-blue-400 hover:text-white hover:shadow-2xl hover:shadow-blue-400/30 hover:scale-110 transform hover:-translate-y-1"
+              className="group relative text-xl border-2 bg-blue-400 border-blue-400 text-blue-600 px-10 py-4 rounded-xl font-semibold transition-all duration-500 backdrop-blur-xl bg-white/10 hover:bg-blue-400 hover:text-white hover:shadow-2xl hover:shadow-blue-400/30 hover:scale-110 transform hover:-translate-y-1"
             >
               <span className="relative z-10">Get In Touch</span>
             </button>

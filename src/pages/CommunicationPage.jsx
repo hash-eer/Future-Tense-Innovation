@@ -6,7 +6,7 @@ import {
     networkingAndCommunication,
     telecommunication,
     wirelessCommunication,
-} from "../utils/importCommunication";
+} from "../utils/common";
 import CommonServiceCard from "../components/cards/commonServiceCard";
 
 const CommunicationPage = () => {

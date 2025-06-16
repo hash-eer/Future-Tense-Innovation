@@ -27,7 +27,7 @@ import {
     wireAndCables,
     wiringAndcablingAccessories,
     wiringDevices,
-} from "../utils/importElectricalUtil";
+} from "../utils/common";
 import CommonServiceCard from "../components/cards/commonServiceCard";
 
 const ElectricalPage = () => {

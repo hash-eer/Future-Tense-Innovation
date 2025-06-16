@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
 import {
     lightBg,
     balletsAndCOntrolleer,
@@ -11,7 +10,7 @@ import {
     Luminaires,
     ObstructionLight,
     OutdoorLight,
-} from "../utils/importLightingUtils";
+} from "../utils/common";
 import CommonServiceCard from "../components/cards/commonServiceCard";
 
 const LightingPage = () => {

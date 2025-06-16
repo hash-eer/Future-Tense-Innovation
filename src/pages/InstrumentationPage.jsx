@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import {instrumentationBg,guages,industrialAutomation,instrumentationTubes,labAndReserch,testAndCalibration} from'../utils/importInstrumentationUtils'
+import {instrumentationBg,guages,industrialAutomation,instrumentationTubes,labAndReserch,testAndCalibration} from'../utils/common'
 import CommonServiceCard from "../components/cards/commonServiceCard";
 
 const InstrumentationPage = () => {
