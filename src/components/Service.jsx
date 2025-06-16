@@ -1,5 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import electricalImg from '../assets/electrical-banner.jpg'
+import lightingImg from '../assets/lighting-banner.jpg'
+import InstrumentationImg from '../assets/inst-banner.jpg'
+import CommunicationImg from '../assets/communication-banner.jpg'
 
 const Service = () => {
 
@@ -8,64 +12,32 @@ const Service = () => {
     {
       title: 'Electrical',
       description: 'CET electric division specializes in energy management, with solutions for all kinds of cabling, power and control, critical power and energy efficiency.',
-      features: [
-        'Electrical Installation & Maintenance',
-        'Power Distribution Systems',
-        'Electrical Safety Audits',
-        'Emergency Electrical Services',
-        'Electrical Troubleshooting',
-        'Circuit Design & Installation'
-      ],
       icon: '⚡',
-      image: 'https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=800&q=80',
+      image:`${electricalImg}`,
       gradient: 'from-yellow-400 to-orange-500',
       link:'/electrical'
     },
     {
       title: 'Lighting',
       description: 'CET lighting helps light the kingdom with lighting products and light bulbs for commercial and residential purposes.',
-      features: [
-        'LED Lighting Installation',
-        'Smart Lighting Systems',
-        'Outdoor & Landscape Lighting',
-        'Emergency Lighting',
-        'Lighting Design & Consultation',
-        'Energy-Efficient Solutions'
-      ],
       icon: '💡',
-      image: 'https://images.unsplash.com/photo-1519501025264-65ba15a82390?auto=format&fit=crop&w=800&q=80',
+      image: `${lightingImg}`,
       gradient: 'from-blue-400 to-purple-500',
       link:'/lighting'
     },
     {
       title: 'Instrumentation',
       description: 'We are specialized in sourcing and supplying instruments and spare parts to the oil field equipments and pipeline materials to oil & gas, petrochemical and power industries etc.',
-      features: [
-        'Process Control Systems',
-        'Measurement Instruments',
-        'Calibration Services',
-        'Industrial Automation',
-        'SCADA Systems',
-        'Data Acquisition Systems'
-      ],
       icon: '🔧',
-      image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80',
+      image: `${InstrumentationImg}`,
       gradient: 'from-green-400 to-teal-500',
       link:'/instrumentation'
     },
     {
       title: 'Communication',
       description: 'We offer a diverse range of connectivity solutions. Find out how we can manage your voice, video and data connectivity needs.',
-      features: [
-        'Network Infrastructure',
-        'Telecommunications Systems',
-        'Fiber Optic Installation',
-        'Wireless Communication',
-        'Security Systems Integration',
-        'Audio/Visual Systems'
-      ],
       icon: '📡',
-      image: 'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?auto=format&fit=crop&w=800&q=80',
+      image: `${CommunicationImg}`,
       gradient: 'from-indigo-400 to-blue-500',
       link:'/communication'
     }

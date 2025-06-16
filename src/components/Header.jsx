@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../assets/logoOfCetksa.png'
+import logo from '../assets/logoOfCetksa.jpg'
 
 const Header = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,7 +33,7 @@ const Header = () => {
             onClick={() => scrollToSection('home')} 
             src={logo} 
             alt="CETKSA Logo" 
-            className="h-14 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
+            className="h-11 w-auto cursor-pointer hover:opacity-80 transition-opacity" 
           />
         
           <div className="hidden md:flex items-center space-x-8">
